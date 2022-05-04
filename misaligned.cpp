@@ -1,5 +1,6 @@
 #include <iostream>
 #include <assert.h>
+#include <iomanip>  
 #include "misaligned.h"
 
 const char* MajorColorNames[] = { "White", "Red", "Black", "Yellow", "Violet" };
