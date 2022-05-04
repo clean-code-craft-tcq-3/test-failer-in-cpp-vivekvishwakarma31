@@ -7,7 +7,7 @@ char getTshirtSizeName(int centimeters ) {
         sizeName = 'S';
     } else if(centimeters  > 38 && centimeters  < 42) {
         sizeName = 'M';
-    } else if(cms > 42) {
+    } else if(centimeters > 42) {
         sizeName = 'L';
     }
     return sizeName;
