@@ -18,7 +18,9 @@ extern int numberOfMajorColors;
         MajorColor m_majorColor;
         MinorColor m_minorColor;
     public:
-        ColorPair(MajorColor major, MinorColor minor);
+        ColorPair(MajorColor major, MinorColor minor);      
+        MajorColor getMajor();
+        MinorColor getMinor();
         std::string ToString();
     };
     ColorPair ConvertPairNumberstoColor(int pairNumber);
