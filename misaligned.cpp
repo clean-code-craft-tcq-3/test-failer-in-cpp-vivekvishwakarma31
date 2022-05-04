@@ -19,14 +19,14 @@ std::string ColorPair::ToString() {
     return colorPairStr;
 }
 
-ColorPair ColorPair::GetColorFromPairNumber(int pairNumber) {
+ColorPair ConvertPairNumberstoColor(int pairNumber) {
     int zeroBasedPairNumber = pairNumber - 1;
     MajorColor majorColor = (MajorColor)(zeroBasedPairNumber / numberOfMinorColors);
     MinorColor minorColor = (MinorColor)(zeroBasedPairNumber % numberOfMinorColors);
 
     return ColorPair(majorColor, minorColor);
 }
-void ColorPair::printColorCodeMap() {
+void printColorCodeMap() {
     std::cout << "----------------------------- " << std::endl;
     std::cout << " Color Code MAP " << std::endl;
     std::cout << "----------------------------- " << std::endl;
@@ -42,10 +42,10 @@ void ColorPair::printColorCodeMap() {
 }
 
 void testNumberToPair(int pairNumber,
-    TelCoColorCoder::MajorColor expectedMajor,
-    TelCoColorCoder::MinorColor expectedMinor)
+    MajorColor expectedMajor,
+    MinorColor expectedMinor)
 {
-    TelCoColorCoder::ColorPair colorPair = TelCoColorCoder::GetColorFromPairNumber(pairNumber);
+    ColorPair colorPair = GetColorFromPairNumber(pairNumber);
     std::cout << "Got pair " << colorPair.ToString().c_str() << std::endl;
     assert(colorPair.getMajor() == expectedMajor);
     assert(colorPair.getMinor() == expectedMinor);
@@ -53,9 +53,9 @@ void testNumberToPair(int pairNumber,
 
 int main() {
     printColorCodeMap();
-    testNumberToPair(1, TelCoColorCoder::WHITE, TelCoColorCoder::BLUE);
-    testNumberToPair(4, TelCoColorCoder::WHITE, TelCoColorCoder::BROWN);
-    testNumberToPair(5, TelCoColorCoder::WHITE, TelCoColorCoder::SLATE);
+    testNumberToPair(1, WHITE, BLUE);
+    testNumberToPair(4, WHITE, BROWN);
+    testNumberToPair(5, WHITE, SLATE);
     std::cout << "All is well (maybe!)\n";
     return 0;
 }
