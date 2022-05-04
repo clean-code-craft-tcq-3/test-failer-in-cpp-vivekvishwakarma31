@@ -32,11 +32,11 @@ void printColorCodeMap() {
     std::cout << "----------------------------- " << std::endl;
     std::cout << "PairNumber | MajorColor | MinorColor " << std::endl;
 
-    int maxPairCount = TelCoColorCoder::numberOfMajorColors * TelCoColorCoder::numberOfMinorColors;
+    int maxPairCount = numberOfMajorColors * numberOfMinorColors;
 
     for (int pairNumber = 1; pairNumber <= maxPairCount; ++pairNumber)
     {
-        TelCoColorCoder::ColorPair colorPair = TelCoColorCoder::GetColorFromPairNumber(pairNumber);
+        ColorPair colorPair = GetColorFromPairNumber(pairNumber);
         std::cout << std::setw(6) << pairNumber << " \t   | \t " << colorPair.ToString().c_str() << std::endl;
     }
 }
