@@ -1,16 +1,26 @@
 #include <iostream>
 #include <assert.h>
 
+#define SUCCESS 200
+#define FAILURE 500
+#define PRODUCTIONCODE 1
+#define STUBCODE 2
+
 int alertFailureCount = 0;
 float threshold = 200;
 
-int networkAlertStub(float celcius) {
+int networkAlertProduction(float celcius) {
     std::cout << "ALERT: Temperature is " << celcius << " celcius.\n";
     // Return 200 for ok
     // Return 500 for not-ok
-    // stub always succeeds and returns 200
-    int code = (celcius > threshold) ? 500 : 200;
+    int code = (celcius > threshold) ? FAILURE : SUCCESS;
     return code;
+}
+
+int networkAlertStub(float celcius) {
+    std::cout << "ALERT: Temperature is " << celcius << " celcius.\n";
+    // stub always succeeds and returns 200
+    return SUCCESS;
 }
 
 float convertFahrenheitToCelcius(float fahrenheit)
@@ -19,22 +29,32 @@ float convertFahrenheitToCelcius(float fahrenheit)
     return celcius;
 }
 
-void alertInCelcius(float farenheit) {
+void alertInCelcius(float farenheit, int testEnvironment ) {
+    int returnCode ;
     float celcius = convertFahrenheitToCelcius(farenheit);
-    int returnCode = networkAlertStub(celcius);
+    if(testEnvironment == PRODUCTIONCODE)
+     returnCode = networkAlertProduction(celcius);
+    else
+     returnCode = networkAlertStub(celcius);
+    
     if (returnCode != 200) {
-        // non-ok response is not an error! Issues happen in life!
-        // let us keep a count of failures to report
-        // However, this code doesn't count failures!
-        // Add a test below to catch this bug. Alter the stub above, if needed.
-        alertFailureCount += 0;
+        alertFailureCount = 1;
+    }
+    else
+    {
+        alertFailureCount = 0;
     }
 }
 
 int main() {
-    alertInCelcius(400.5);
-    alertInCelcius(303.6);
+    alertInCelcius(400.5, PRODUCTIONCODE);
     assert(alertFailureCount==1);
+    alertInCelcius(400.5, STUBCODE);
+    assert(alertFailureCount==0);
+    alertInCelcius(303.6, PRODUCTIONCODE);
+    assert(alertFailureCount==1);
+    alertInCelcius(303.6, STUBCODE);
+    assert(alertFailureCount==0);
     std::cout << alertFailureCount << " alerts failed.\n";
     std::cout << "All is well (maybe!)\n";
     return 0;
