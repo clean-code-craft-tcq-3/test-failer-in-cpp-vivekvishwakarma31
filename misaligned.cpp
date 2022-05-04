@@ -19,6 +19,14 @@ std::string ColorPair::ToString() {
     return colorPairStr;
 }
 
+MajorColor ColorPair::getMajor() {
+    return m_majorColor;
+}
+
+MinorColor ColorPair::getMinor() {
+    return m_minorColor;
+}
+
 ColorPair ConvertPairNumberstoColor(int pairNumber) {
     int zeroBasedPairNumber = pairNumber - 1;
     MajorColor majorColor = (MajorColor)(zeroBasedPairNumber / numberOfMinorColors);
