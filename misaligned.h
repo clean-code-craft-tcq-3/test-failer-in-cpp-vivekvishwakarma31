@@ -21,9 +21,7 @@ extern int numberOfMajorColors;
         ColorPair(MajorColor major, MinorColor minor);
         std::string ToString();
     };
-
-    int ConvertPairNumberstoColor(MajorColor major, MinorColor minor);
-
+    ColorPair ConvertPairNumberstoColor(int pairNumber);
     void printColorCodeMap();
 
 #endif
