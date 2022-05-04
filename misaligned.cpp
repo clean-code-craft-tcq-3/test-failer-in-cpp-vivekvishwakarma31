@@ -36,7 +36,7 @@ void printColorCodeMap() {
 
     for (int pairNumber = 1; pairNumber <= maxPairCount; ++pairNumber)
     {
-        ColorPair colorPair = GetColorFromPairNumber(pairNumber);
+        ColorPair colorPair = ConvertPairNumberstoColor(pairNumber);
         std::cout << std::setw(6) << pairNumber << " \t   | \t " << colorPair.ToString().c_str() << std::endl;
     }
 }
@@ -45,7 +45,7 @@ void testNumberToPair(int pairNumber,
     MajorColor expectedMajor,
     MinorColor expectedMinor)
 {
-    ColorPair colorPair = GetColorFromPairNumber(pairNumber);
+    ColorPair colorPair = ConvertPairNumberstoColor(pairNumber);
     std::cout << "Got pair " << colorPair.ToString().c_str() << std::endl;
     assert(colorPair.getMajor() == expectedMajor);
     assert(colorPair.getMinor() == expectedMinor);
